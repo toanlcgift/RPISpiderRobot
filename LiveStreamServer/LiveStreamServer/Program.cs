@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using SamplesCore;
 
 namespace LiveStreamServer
 {
@@ -14,6 +15,24 @@ namespace LiveStreamServer
     {
         public static void Main(string[] args)
         {
+            ISample sample =
+                new CaffeSample();
+            //new ClaheSample();
+            //new ConnectedComponentsSample();
+            //new HOGSample();
+            //new HoughLinesSample();
+            //new MatOperations();
+            //new NormalArrayOperations();
+            //new PhotoMethods();
+            //new MorphologySample();
+            //new PixelAccess();
+            //new SolveEquation();
+            //new Subdiv2DSample();
+            //new SVMSample();
+            //new VideoWriterSample();
+            //new VideoCaptureSample();
+
+            sample.Run();
             BuildWebHost(args).Run();
         }
 

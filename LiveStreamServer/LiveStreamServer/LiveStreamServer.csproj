@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="CoreCompat.System.Drawing.v2" Version="5.2.0-preview1-r131" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="OpenCvSharp3-AnyCPU" Version="3.4.1.20180319" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +20,48 @@
   <ItemGroup>
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Content Remove="ClientApp\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Data\Image\asahiyama.jpg" />
+    <None Remove="Data\Image\fruits.jpg" />
+    <None Remove="Data\Image\Girl.bmp" />
+    <None Remove="Data\Image\goryokaku.jpg" />
+    <None Remove="Data\Image\lenna.png" />
+    <None Remove="Data\Image\shapes.png" />
+    <None Remove="Data\Image\space_shuttle.jpg" />
+    <None Remove="Data\Image\tsukuba_left.png" />
+    <None Remove="Data\Image\tsukuba_right.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Data\Image\asahiyama.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Image\fruits.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Image\Girl.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Image\goryokaku.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Image\lenna.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Image\shapes.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Image\space_shuttle.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Image\tsukuba_left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Image\tsukuba_right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
