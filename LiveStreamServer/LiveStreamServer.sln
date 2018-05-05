@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveStreamServer", "LiveStreamServer\LiveStreamServer.csproj", "{A0EC82D7-2AC2-4398-8D5B-E0327EDB6F64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveStreamServer", "LiveStreamServer\LiveStreamServer.csproj", "{A0EC82D7-2AC2-4398-8D5B-E0327EDB6F64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

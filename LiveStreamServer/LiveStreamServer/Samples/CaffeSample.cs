@@ -14,19 +14,19 @@ namespace SamplesCore
     {
         public void Run()
         {
-            const string protoTxt = @"Data\Text\bvlc_googlenet.prototxt";
+            const string protoTxt = @"Data/Text/bvlc_googlenet.prototxt";
             const string caffeModel = "bvlc_googlenet.caffemodel";
-            const string synsetWords = @"Data\Text\synset_words.txt";
+            const string synsetWords = @"Data/Text/synset_words.txt";
             var classNames = File.ReadAllLines(synsetWords)
                 .Select(line => line.Split(' ').Last())
                 .ToArray();
 
             Console.Write("Downloading Caffe Model...");
-            PrepareModel(caffeModel);
+            //PrepareModel(caffeModel);
             Console.WriteLine(" Done");
 
             using (var net = CvDnn.ReadNetFromCaffe(protoTxt, caffeModel))
-            using (var img = new Mat(@"Data\Image\space_shuttle.jpg"))
+            using (var img = new Mat(@"Data/Image/space_shuttle.jpg"))
             {
                 Console.WriteLine("Layer names: {0}", string.Join(", ", net.GetLayerNames()));
                 Console.WriteLine();
