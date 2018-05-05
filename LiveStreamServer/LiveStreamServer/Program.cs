@@ -48,7 +48,7 @@ namespace LiveStreamServer
             }
             for (; ; )
             {
-                WiringPi.GPIO.digitalWrite(0, 1);
+                WiringPi.GPIO.digitalWrite(7, 1);
                 Thread.Sleep(1000);
             }
         }
