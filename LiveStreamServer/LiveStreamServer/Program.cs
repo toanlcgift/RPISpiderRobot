@@ -18,9 +18,9 @@ namespace LiveStreamServer
         public static void Main(string[] args)
         {
             ISample sample =
-                new CaffeSample();
+            //new CaffeSample();
             //new ClaheSample();
-            //new ConnectedComponentsSample();
+            new ConnectedComponentsSample();
             //new HOGSample();
             //new HoughLinesSample();
             //new MatOperations();
@@ -33,22 +33,21 @@ namespace LiveStreamServer
             //new SVMSample();
             //new VideoWriterSample();
             //new VideoCaptureSample();
-            TestWiringPi();
-            //sample.Run();
+            //TestWiringPi();
+            sample.Run();
             BuildWebHost(args).Run();
         }
 
         public static void TestWiringPi()
         {
-            int ret = Init.WiringPiSetupGpio();
-            if (ret == -1)
-            {
-                Console.WriteLine("Init failed: {0}", ret);
-                return;
-            }
+            Init.WiringPiSetupSys();
+            Init.WiringPiSetup();
+            
+            int i = 0;
             for (; ; )
             {
-                WiringPi.GPIO.digitalWrite(7, 1);
+                WiringPi.GPIO.digitalWrite(0, (i++)%2);
+                Console.WriteLine(i % 2);
                 Thread.Sleep(1000);
             }
         }

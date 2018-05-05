@@ -34,14 +34,19 @@ namespace SamplesCore
             var filtered = new Mat();
             cc.FilterByBlob(src, filtered, maxBlob);
 
-            using (new Window("src", src))
-            using (new Window("binary", binary))
-            using (new Window("labels", labelView))
-            using (new Window("bonding boxes", rectView))
-            using (new Window("maximum blob", filtered))
-            {
-                Cv2.WaitKey();
-            }
+            //using (new Window("src", src))
+            //using (new Window("binary", binary))
+            //using (new Window("labels", labelView))
+            //using (new Window("bonding boxes", rectView))
+            //using (new Window("maximum blob", filtered))
+            //{
+            //    Cv2.WaitKey();
+            //}
+            src.SaveImage("src.png");
+            binary.SaveImage("binary.png");
+            labelView.SaveImage("labels.png");
+            rectView.SaveImage("boxes.png");
+            filtered.SaveImage("maximumblob.png");
         }
     }
 }
