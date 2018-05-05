@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveStreamServer", "LiveStreamServer\LiveStreamServer.csproj", "{A0EC82D7-2AC2-4398-8D5B-E0327EDB6F64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiringPi", "WiringPi\WiringPi.csproj", "{44164C3F-B228-4488-B027-EA9717E7E6E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A0EC82D7-2AC2-4398-8D5B-E0327EDB6F64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0EC82D7-2AC2-4398-8D5B-E0327EDB6F64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0EC82D7-2AC2-4398-8D5B-E0327EDB6F64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44164C3F-B228-4488-B027-EA9717E7E6E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44164C3F-B228-4488-B027-EA9717E7E6E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44164C3F-B228-4488-B027-EA9717E7E6E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44164C3F-B228-4488-B027-EA9717E7E6E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
