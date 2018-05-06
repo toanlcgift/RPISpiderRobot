@@ -542,6 +542,10 @@ const routes: Routes = [
                 "loadChildren": ".\/pages\/default\/header\/header-profile\/header-profile.module#HeaderProfileModule"
             },
             {
+                "path": "livestream",
+                "loadChildren": ".\/pages\/default\/livestream\/livestream.module#LiveStreamModule"
+            },
+            {
                 "path": "404",
                 "loadChildren": ".\/pages\/default\/not-found\/not-found.module#NotFoundModule"
             },
