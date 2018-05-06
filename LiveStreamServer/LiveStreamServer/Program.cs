@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using LiveStreamServer.Samples;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +21,7 @@ namespace LiveStreamServer
             ISample sample =
             //new CaffeSample();
             //new ClaheSample();
-            new ConnectedComponentsSample();
+            //new ConnectedComponentsSample();
             //new HOGSample();
             //new HoughLinesSample();
             //new MatOperations();
@@ -34,6 +35,7 @@ namespace LiveStreamServer
             //new VideoWriterSample();
             //new VideoCaptureSample();
             //TestWiringPi();
+            new FaceDetection();
             sample.Run();
             BuildWebHost(args).Run();
         }

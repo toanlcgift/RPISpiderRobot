@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Data\haarcascades\haarcascade_frontalface_alt.xml" />
     <None Remove="Data\Image\asahiyama.jpg" />
     <None Remove="Data\Image\fruits.jpg" />
     <None Remove="Data\Image\Girl.bmp" />
@@ -32,9 +33,11 @@
     <None Remove="Data\Image\space_shuttle.jpg" />
     <None Remove="Data\Image\tsukuba_left.png" />
     <None Remove="Data\Image\tsukuba_right.png" />
+    <None Remove="haarcascade_frontalface_alt.xml" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Data\haarcascades\haarcascade_frontalface_alt.xml" />
     <Content Include="Data\Image\asahiyama.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -62,6 +65,7 @@
     <Content Include="Data\Image\tsukuba_right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="haarcascade_frontalface_alt.xml" />
   </ItemGroup>
 
   <ItemGroup>
