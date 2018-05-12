@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using LiveStreamServer.Helpers;
 using LiveStreamServer.Samples;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -36,7 +37,8 @@ namespace LiveStreamServer
             //new VideoCaptureSample();
             //TestWiringPi();
             new FaceDetection();
-            sample.Run();
+            //sample.Run();
+            "mkdir testdir".Bash();
             BuildWebHost(args).Run();
         }
 

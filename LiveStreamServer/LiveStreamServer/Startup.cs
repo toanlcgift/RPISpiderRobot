@@ -1,3 +1,4 @@
+using LiveStreamServer.Helper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -68,6 +69,7 @@ namespace LiveStreamServer
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseCors("AllowAll");
+            app.Map("/ws", SocketHandler.Map);
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
