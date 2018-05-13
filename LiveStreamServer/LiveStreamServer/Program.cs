@@ -38,7 +38,7 @@ namespace LiveStreamServer
             //TestWiringPi();
             new FaceDetection();
             //sample.Run();
-            "mkdir testdir".Bash();
+            //"mkdir testdir".Bash();
             BuildWebHost(args).Run();
         }
 
@@ -46,11 +46,11 @@ namespace LiveStreamServer
         {
             Init.WiringPiSetupSys();
             Init.WiringPiSetup();
-            
+
             int i = 0;
             for (; ; )
             {
-                WiringPi.GPIO.digitalWrite(0, (i++)%2);
+                WiringPi.GPIO.digitalWrite(0, (i++) % 2);
                 Console.WriteLine(i % 2);
                 Thread.Sleep(1000);
             }
@@ -58,6 +58,7 @@ namespace LiveStreamServer
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseUrls("http://0.0.0.0:5000")
                 .UseStartup<Startup>()
                 .Build();
     }
