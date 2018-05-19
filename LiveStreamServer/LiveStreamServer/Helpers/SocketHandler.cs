@@ -33,6 +33,10 @@ namespace LiveStreamServer.Helper
                 while ((read = streamReader.Read(buf, 0, buf.Length)) > 0)
                 {
                     buffer[i] = Convert.ToByte(buf[i]);
+                    if (i++ > BufferSize)
+                    {
+                        break;
+                    }
                 }
                 var outgoing = new ArraySegment<byte>(buffer, 0, buf.Length);
                 await this.socket.SendAsync(outgoing, WebSocketMessageType.Binary, true, CancellationToken.None);
