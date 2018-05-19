@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using System;
+using System.IO;
 
 namespace LiveStreamServer.Helper
 {
@@ -21,14 +22,20 @@ namespace LiveStreamServer.Helper
         async Task EchoLoop()
         {
             var buffer = new byte[BufferSize];
-            var seg = new ArraySegment<byte>(buffer);
+            var buf = new char[BufferSize];
 
             while (this.socket.State == WebSocketState.Open)
             {
                 Console.WriteLine("client connected");
-                var incoming = await this.socket.ReceiveAsync(seg, CancellationToken.None);
-                var outgoing = new ArraySegment<byte>(buffer, 0, incoming.Count);
-                await this.socket.SendAsync(outgoing, WebSocketMessageType.Text, true, CancellationToken.None);
+                StreamReader streamReader = new StreamReader(SamplesCore.FilePath.Movie.Bach);
+                int read = 0;
+                int i = 0;
+                while ((read = streamReader.Read(buf, 0, buf.Length)) > 0)
+                {
+                    buffer[i] = Convert.ToByte(buf[i]);
+                }
+                var outgoing = new ArraySegment<byte>(buffer, 0, buf.Length);
+                await this.socket.SendAsync(outgoing, WebSocketMessageType.Binary, true, CancellationToken.None);
             }
         }
 
