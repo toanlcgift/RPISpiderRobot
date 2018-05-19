@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace LiveStreamServer.Helper
 {
@@ -27,19 +28,18 @@ namespace LiveStreamServer.Helper
             while (this.socket.State == WebSocketState.Open)
             {
                 Console.WriteLine("client connected");
-                StreamReader streamReader = new StreamReader(SamplesCore.FilePath.Movie.Bach);
-                int read = 0;
-                int i = 0;
-                while ((read = streamReader.Read(buf, 0, buf.Length)) > 0)
-                {
-                    buffer[i] = Convert.ToByte(buf[i]);
-                    if (i++ > BufferSize)
-                    {
-                        break;
-                    }
-                }
-                var outgoing = new ArraySegment<byte>(buffer, 0, buf.Length);
-                await this.socket.SendAsync(outgoing, WebSocketMessageType.Binary, true, CancellationToken.None);
+                //StreamReader streamReader = new StreamReader(SamplesCore.FilePath.Movie.Bach);
+                //streamReader.BaseStream.Seek(BufferSize, SeekOrigin.End);
+                //while (streamReader.BaseStream.Position > 0)
+                //{
+                //    buf.Initialize();
+                //    streamReader.BaseStream.Seek(BufferSize, SeekOrigin.Current);
+                //    int bytesRead = streamReader.Read(buf, 0, BufferSize);
+                //    buffer = buf.Select(x => (byte)x).ToArray();
+                //    var outgoing = new ArraySegment<byte>(buffer, 0, buffer.Length);
+                //    await this.socket.SendAsync(outgoing, WebSocketMessageType.Binary, true, CancellationToken.None);
+                //}
+
             }
         }
 
