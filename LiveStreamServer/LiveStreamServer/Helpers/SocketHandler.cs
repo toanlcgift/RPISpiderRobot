@@ -32,7 +32,11 @@ namespace LiveStreamServer.Helper
                 var incoming = await this.socket.ReceiveAsync(seg, CancellationToken.None);
                 if (System.Text.Encoding.UTF8.GetString(seg.ToArray()).Contains("live"))
                 {
-                    Console.WriteLine("bash capture.sh".Bash());
+                    Console.WriteLine("rm -rf ClientApp/dist/video.mp4".Bash());
+                    Console.WriteLine("raspivid -o ClientApp/dist/video.h264 -t 2000".Bash());
+                    Console.WriteLine("MP4Box -add ClientApp/dist/video.h264 ClientApp/dist/video.mp4".Bash());
+                    Console.WriteLine("chmod 777 ClientApp/dist/video.mp4".Bash());
+                    Console.WriteLine("rm -rf ClientApp/dist/video.h264".Bash());
                     var bytes = System.Text.Encoding.ASCII.GetBytes("done");
                     await this.socket.SendAsync(new ArraySegment<byte>(bytes, 0, bytes.Length), WebSocketMessageType.Text, true, CancellationToken.None);
                 }

@@ -5,6 +5,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
     templateUrl: './livestream.component.html',
     encapsulation: ViewEncapsulation.None,
 })
+
 export class LiveStreamComponent implements OnInit {
 
     constructor() {
@@ -17,6 +18,7 @@ export class LiveStreamComponent implements OnInit {
         };
         socket.onmessage = function (event) {
             if (event.data == "done") {
+                document.getElementById("videoplayer").children[0].setAttribute("src", "video.mp4");
             }
             console.log(event);
         }
