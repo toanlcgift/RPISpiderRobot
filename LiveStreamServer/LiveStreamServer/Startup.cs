@@ -69,7 +69,7 @@ namespace LiveStreamServer
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseCors("AllowAll");
-            //app.Map("/ws", SocketHandler.Map);
+            app.Map("/ws", SocketHandler.Map);
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 

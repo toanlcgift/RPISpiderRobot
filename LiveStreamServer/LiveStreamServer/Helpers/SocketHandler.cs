@@ -30,9 +30,11 @@ namespace LiveStreamServer.Helper
             {
                 Console.WriteLine("client connected");
                 var incoming = await this.socket.ReceiveAsync(seg, CancellationToken.None);
-                if (incoming.ToString() == "live")
+                if (System.Text.Encoding.UTF8.GetString(seg.ToArray()).Contains("live"))
                 {
-                    Console.WriteLine("bash ClientApp/dist/capture.sh".Bash());
+                    Console.WriteLine("bash capture.sh".Bash());
+                    var bytes = System.Text.Encoding.ASCII.GetBytes("done");
+                    await this.socket.SendAsync(new ArraySegment<byte>(bytes, 0, bytes.Length), WebSocketMessageType.Text, true, CancellationToken.None);
                 }
 
                 //var outgoing = new ArraySegment<byte>(buffer, 0, incoming.Count);
