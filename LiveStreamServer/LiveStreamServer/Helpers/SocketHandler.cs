@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System;
 using System.IO;
 using System.Linq;
+using LiveStreamServer.Helpers;
 
 namespace LiveStreamServer.Helper
 {
@@ -23,23 +24,19 @@ namespace LiveStreamServer.Helper
         async Task EchoLoop()
         {
             var buffer = new byte[BufferSize];
-            var buf = new char[BufferSize];
+            var seg = new ArraySegment<byte>(buffer);
 
             while (this.socket.State == WebSocketState.Open)
             {
                 Console.WriteLine("client connected");
-                //StreamReader streamReader = new StreamReader(SamplesCore.FilePath.Movie.Bach);
-                //streamReader.BaseStream.Seek(BufferSize, SeekOrigin.End);
-                //while (streamReader.BaseStream.Position > 0)
-                //{
-                //    buf.Initialize();
-                //    streamReader.BaseStream.Seek(BufferSize, SeekOrigin.Current);
-                //    int bytesRead = streamReader.Read(buf, 0, BufferSize);
-                //    buffer = buf.Select(x => (byte)x).ToArray();
-                //    var outgoing = new ArraySegment<byte>(buffer, 0, buffer.Length);
-                //    await this.socket.SendAsync(outgoing, WebSocketMessageType.Binary, true, CancellationToken.None);
-                //}
+                var incoming = await this.socket.ReceiveAsync(seg, CancellationToken.None);
+                if (incoming.ToString() == "live")
+                {
+                    Console.WriteLine("bash ClientApp/dist/capture.sh".Bash());
+                }
 
+                //var outgoing = new ArraySegment<byte>(buffer, 0, incoming.Count);
+                //await this.socket.SendAsync(outgoing, WebSocketMessageType.Text, true, CancellationToken.None);
             }
         }
 
