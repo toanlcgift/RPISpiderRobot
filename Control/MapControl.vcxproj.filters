@@ -15,11 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="__vm\.Control.vsarduino.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <None Include="MapControl.ino" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ESP8266AP.ino" />
+    <ClInclude Include="__vm\.MapControl.vsarduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

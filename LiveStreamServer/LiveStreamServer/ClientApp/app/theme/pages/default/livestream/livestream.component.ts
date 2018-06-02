@@ -23,4 +23,9 @@ export class LiveStreamComponent implements OnInit {
             console.log(event);
         }
     }
+
+    playnew()
+    {
+
+    }
 }
