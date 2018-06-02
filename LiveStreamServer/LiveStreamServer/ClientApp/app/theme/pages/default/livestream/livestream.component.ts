@@ -12,7 +12,7 @@ export class LiveStreamComponent implements OnInit {
     }
 
     ngOnInit() {
-        var socket = new WebSocket("ws://192.168.17.102:5000/ws");
+        var socket = new WebSocket("ws://" + self.location.host + "/ws");
         socket.onopen = function (event) {
             socket.send("live");
         };
