@@ -3,9 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:XamClient"
              x:Class="XamClient.MainPage">
-
-	<Label Text="Welcome to Xamarin.Forms!" 
+    <StackLayout>
+        <Label Text="Input:" 
            VerticalOptions="Center" 
            HorizontalOptions="Center" />
-
+        <Entry HorizontalOptions="FillAndExpand" x:Name="entry"></Entry>
+        <Button Text="Send" x:Name="button"></Button>
+        <Label x:Name="result" Text="Result:"></Label>
+    </StackLayout>
 </ContentPage>
