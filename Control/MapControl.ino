@@ -15,10 +15,11 @@
 #include "FS.h"
 #include <ESP8266FtpServer.h>
 #include <Timer.h>
+#include <ArduinoJson.h>
 
 #define SPLIT_CHAR '*'
 
-Servo myservo;  // create servo object to control a servo 
+Servo myservo[8];  // create servo object to control a servo 
 				// twelve servo objects can be created on most boards
 
 Timer t;
@@ -44,7 +45,14 @@ char parse[3];
 
 void setup()
 {
-	myservo.attach(2);  // attaches the servo on GIO2 to the servo object 
+	myservo[0].attach(16);  // attaches the servo on GIO2 to the servo object 
+	myservo[1].attach(5);
+	myservo[2].attach(4);
+	myservo[3].attach(0);
+	myservo[4].attach(2);
+	myservo[5].attach(14);
+	myservo[6].attach(12);
+	myservo[7].attach(13);
 	Serial.begin(9600);
 	EEPROM.begin(512);
 	for (uint8_t t = 4; t > 0; t--) {
@@ -118,9 +126,21 @@ void onGetSetting() {
 void onPostServo() {
 	auto content = server.arg("plain");
 	auto con = content.c_str();
+	//ahihi
 	Serial.println(content);
-	int pos = atoi(con);
-	myservo.write(pos);
+	StaticJsonBuffer<200> jsonBuffer;
+
+	JsonObject& root = jsonBuffer.parseObject(con);
+	myservo[0].write((int)(root["servo0"]));
+	/*
+	myservo[1].write((int)(root["servo1"]));
+	myservo[2].write((int)(root["servo2"]));
+	myservo[3].write((int)(root["servo3"]));
+	myservo[4].write((int)(root["servo4"]));
+	myservo[5].write((int)(root["servo5"]));
+	myservo[6].write((int)(root["servo6"]));
+	myservo[7].write((int)(root["servo7"]));*/
+	server.send_P(200, "text/html", "success!");
 }
 
 void getRomSetting() {
