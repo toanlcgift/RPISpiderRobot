@@ -37,7 +37,7 @@ namespace LiveStreamServer
             //new VideoCaptureSample();
             //TestWiringPi();
             new FaceDetection();
-            //sample.Run();
+            sample.Run();
             //"mkdir testdir".Bash();
             BuildWebHost(args).Run();
         }
