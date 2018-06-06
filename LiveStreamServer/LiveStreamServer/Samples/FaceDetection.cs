@@ -17,17 +17,17 @@ namespace LiveStreamServer.Samples
             var capture = new VideoCapture(0);
 
             int sleepTime = (int)Math.Round(1000 / ((capture.Fps == 0) ? 60 : capture.Fps));
-            var hog = new HOGDescriptor();
-            hog.SetSVMDetector(HOGDescriptor.GetDefaultPeopleDetector());
-            var recognizer = OpenCvSharp.Face.EigenFaceRecognizer.Create(2);
-            var img1 = Cv2.ImRead(SamplesCore.FilePath.Image.Girl, ImreadModes.GrayScale);
-            var img2 = Cv2.ImRead(SamplesCore.FilePath.Image.Lenna, ImreadModes.GrayScale);
-            recognizer.Read("trainfile1.dat");
-            recognizer.Predict(InputArray.Create(img1), out int label, out double confidence);
-            //recognizer.Train(new List<Mat>() { img1, img2.SubMat(0,256,0,256) }, new List<int>() { 1, 2 });
-            //recognizer.Save("trainfile1.dat");
-            System.Console.WriteLine("label: " + label + " confidence: " + confidence);
-            using (var window = new Window("capture"))
+            //var hog = new HOGDescriptor();
+            //hog.SetSVMDetector(HOGDescriptor.GetDefaultPeopleDetector());
+            //var recognizer = OpenCvSharp.Face.EigenFaceRecognizer.Create(2);
+            //var img1 = Cv2.ImRead(SamplesCore.FilePath.Image.Girl, ImreadModes.GrayScale);
+            //var img2 = Cv2.ImRead(SamplesCore.FilePath.Image.Lenna, ImreadModes.GrayScale);
+            //recognizer.Read("trainfile1.dat");
+            //recognizer.Predict(InputArray.Create(img1), out int label, out double confidence);
+            ////recognizer.Train(new List<Mat>() { img1, img2.SubMat(0,256,0,256) }, new List<int>() { 1, 2 });
+            ////recognizer.Save("trainfile1.dat");
+            //System.Console.WriteLine("label: " + label + " confidence: " + confidence);
+            //using (var window = new Window("capture"))
             {
                 // Frame image buffer
                 Mat image = new Mat();
@@ -47,19 +47,19 @@ namespace LiveStreamServer.Samples
                         }
                     }
 
-                    var found = hog.DetectMultiScale(image, 0, new Size(8, 8), new Size(24, 16), 1.05, 2);
-                    if (found.Count() > 0)
-                    {
-                        for (int i = 0; i < found.Count(); i++)
-                        {
-                            Cv2.Rectangle(image, found[i], Scalar.Green, 2);
-                        }
-                    }
-                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                        window.ShowImage(image);
-                    else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                        image.SaveImage("result.png");
-                    Cv2.WaitKey(sleepTime);
+                    //var found = hog.DetectMultiScale(image, 0, new Size(8, 8), new Size(24, 16), 1.05, 2);
+                    //if (found.Count() > 0)
+                    //{
+                    //    for (int i = 0; i < found.Count(); i++)
+                    //    {
+                    //        Cv2.Rectangle(image, found[i], Scalar.Green, 2);
+                    //    }
+                    //}
+                    //if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    //    window.ShowImage(image);
+                    //else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                    
+                    //Cv2.WaitKey(sleepTime);
                 }
             }
 
