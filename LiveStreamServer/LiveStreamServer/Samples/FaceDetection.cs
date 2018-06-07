@@ -1,4 +1,5 @@
-﻿using OpenCvSharp;
+﻿using LiveStreamServer.Helpers;
+using OpenCvSharp;
 using SamplesCore;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,11 @@ namespace LiveStreamServer.Samples
     {
         public void Run()
         {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                Console.WriteLine("run bash shell: 'sudo modprobe bcm2835-v4l2'");
+                "sudo modprobe bcm2835-v4l2".Bash();
+            }
             CascadeClassifier cascadeClassifier = new CascadeClassifier("haarcascade_frontalface_default.xml");
             // Opens MP4 file (ffmpeg is probably needed)
             var capture = new VideoCapture(0);
@@ -21,7 +27,7 @@ namespace LiveStreamServer.Samples
             hog.SetSVMDetector(HOGDescriptor.GetDefaultPeopleDetector());
             var recognizer = OpenCvSharp.Face.EigenFaceRecognizer.Create(2);
             var img1 = Cv2.ImRead(SamplesCore.FilePath.Image.Girl, ImreadModes.GrayScale);
-            
+
             var img2 = Cv2.ImRead(SamplesCore.FilePath.Image.Lenna, ImreadModes.GrayScale);
             System.Console.WriteLine("img1 width: " + img1.Size().Width + " height:" + img1.Size().Height);
             System.Console.WriteLine("img2 width: " + img2.Size().Width + " height:" + img2.Size().Height);
@@ -31,14 +37,14 @@ namespace LiveStreamServer.Samples
             System.Console.WriteLine("before predict");
             System.Console.WriteLine("img1 width: " + img1.Size().Width + " height:" + img1.Size().Height);
             System.Console.WriteLine("img2 width: " + img2.Size().Width + " height:" + img2.Size().Height);
-            
+
             recognizer.Predict(InputArray.Create(img1), out int label, out double confidence);
             System.Console.WriteLine("label: " + label + " confidence: " + confidence);
-            //using (var window = new Window("capture"))
+
+            using (var window = new Window("capture"))
             {
                 // Frame image buffer
                 Mat image = new Mat();
-
                 // When the movie playback reaches end, Mat.data becomes NULL.
                 while (true)
                 {
@@ -62,11 +68,13 @@ namespace LiveStreamServer.Samples
                             Cv2.Rectangle(image, found[i], Scalar.Green, 2);
                         }
                     }
-                    //if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                    //    window.ShowImage(image);
-                    //else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
 
-                    //Cv2.WaitKey(sleepTime);
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    {
+                        window.ShowImage(image);
+                        Cv2.WaitKey(sleepTime);
+                    }
+
                 }
             }
 
