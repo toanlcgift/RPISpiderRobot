@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamClient.ESP8266">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="entry" Text="192.168.1.69"></Entry>
+            <Slider Minimum="0" Maximum="360" x:Name="slider"></Slider>
+            <Label x:Name="label"></Label>
+            <Button Text="Send" x:Name="button"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -93,10 +93,10 @@ namespace XamClient
 
         protected override async void OnStart()
         {
-            await InitDB();
-            await SetupSocketClient();
+            //await InitDB();
+            //await SetupSocketClient();
             //await Task.Delay(3000);
-            var main = new MainPage();
+            var main = new ESP8266();
             MainPage = main;
             // Handle when your app starts
         }
