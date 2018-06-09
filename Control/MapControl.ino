@@ -26,6 +26,16 @@ Timer t;
 
 static const char ssid[] = "ESP8266AccessPoint";
 static const char password[] = "123456789";
+
+static const char* servo0 = "servo0";
+static const char* servo1 = "servo1";
+static const char* servo2 = "servo2";
+static const char* servo3 = "servo3";
+static const char* servo4 = "servo4";
+static const char* servo5 = "servo5";
+static const char* servo6 = "servo6";
+static const char* servo7 = "servo7";
+
 MDNSResponder mdns;
 ESP8266WebServer server(80);
 ESP8266WiFiMulti WiFiMulti;
@@ -131,15 +141,22 @@ void onPostServo() {
 	StaticJsonBuffer<200> jsonBuffer;
 
 	JsonObject& root = jsonBuffer.parseObject(con);
-	myservo[0].write((int)(root["servo0"]));
-	/*
-	myservo[1].write((int)(root["servo1"]));
-	myservo[2].write((int)(root["servo2"]));
-	myservo[3].write((int)(root["servo3"]));
-	myservo[4].write((int)(root["servo4"]));
-	myservo[5].write((int)(root["servo5"]));
-	myservo[6].write((int)(root["servo6"]));
-	myservo[7].write((int)(root["servo7"]));*/
+	if (root.containsKey(servo0))
+		myservo[0].write((int)(root[servo0]));
+	if (root.containsKey(servo1))
+		myservo[1].write((int)(root[servo1]));
+	if (root.containsKey(servo2))
+		myservo[2].write((int)(root[servo2]));
+	if (root.containsKey(servo3))
+		myservo[3].write((int)(root[servo3]));
+	if (root.containsKey(servo4))
+		myservo[4].write((int)(root[servo4]));
+	if (root.containsKey(servo5))
+		myservo[5].write((int)(root[servo5]));
+	if (root.containsKey(servo6))
+		myservo[6].write((int)(root[servo6]));
+	if (root.containsKey(servo7))
+		myservo[7].write((int)(root[servo7]));
 	server.send_P(200, "text/html", "success!");
 }
 
