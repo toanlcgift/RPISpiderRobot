@@ -20,7 +20,7 @@ namespace LiveStreamServer
         public static void Main(string[] args)
         {
             ISample sample =
-            //new CaffeSample();
+            new CaffeSample();
             //new ClaheSample();
             //new ConnectedComponentsSample();
             //new HOGSample();
@@ -36,7 +36,7 @@ namespace LiveStreamServer
             //new VideoWriterSample();
             //new VideoCaptureSample();
             //TestWiringPi();
-            new FaceDetection();
+            //new FaceDetection();
             //sample.Run();
             //"mkdir testdir".Bash();
             BuildWebHost(args).Run();

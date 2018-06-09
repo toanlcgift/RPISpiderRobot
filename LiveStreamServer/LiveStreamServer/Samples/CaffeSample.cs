@@ -20,33 +20,38 @@ namespace SamplesCore
             var classNames = File.ReadAllLines(synsetWords)
                 .Select(line => line.Split(' ').Last())
                 .ToArray();
-
+            var capture = new VideoCapture(0);
             Console.Write("Downloading Caffe Model...");
             //PrepareModel(caffeModel);
-            Console.WriteLine(" Done");
-
+            Console.WriteLine("Done");
+            using (var img = new Mat())
+            using (var window = new Window("capture"))
             using (var net = CvDnn.ReadNetFromCaffe(protoTxt, caffeModel))
-            using (var img = new Mat(@"Data/Image/space_shuttle.jpg"))
-            {
-                Console.WriteLine("Layer names: {0}", string.Join(", ", net.GetLayerNames()));
-                Console.WriteLine();
-
-                // Convert Mat to batch of images
-                using (var inputBlob = CvDnn.BlobFromImage(img, 1, new Size(224, 224), new Scalar(104, 117, 123)))
+                while (true)
                 {
-                    net.SetInput(inputBlob, "data");
-                    using (var prob = net.Forward("prob"))
-                    {
-                        // find the best class
-                        GetMaxClass(prob, out int classId, out double classProb);
-                        Console.WriteLine("Best class: #{0} '{1}'", classId, classNames[classId]);
-                        Console.WriteLine("Probability: {0:P2}", classProb);
+                    capture.Read(img);
+                    if (img.Empty())
+                        break;
+                    Console.WriteLine("Layer names: {0}", string.Join(", ", net.GetLayerNames()));
+                    Console.WriteLine();
 
-                        Console.WriteLine("Press any key to exit");
-                        Console.Read();
+                    // Convert Mat to batch of images
+                    using (var inputBlob = CvDnn.BlobFromImage(img, 1, new Size(224, 224), new Scalar(104, 117, 123)))
+                    {
+                        net.SetInput(inputBlob, "data");
+                        using (var prob = net.Forward("prob"))
+                        {
+                            // find the best class
+                            GetMaxClass(prob, out int classId, out double classProb);
+                            Console.WriteLine("Best class: #{0} '{1}'", classId, classNames[classId]);
+                            Console.WriteLine("Probability: {0:P2}", classProb);
+                            img.PutText(classNames[classId] + String.Format(" Probability: {0:P2}", classProb),
+                                new Point(0 + 10, img.Size().Height - 10), HersheyFonts.HersheyDuplex, 1, Scalar.Black);
+                            window.ShowImage(img);
+                            Cv2.WaitKey(1);
+                        }
                     }
                 }
-            }
         }
 
         private static byte[] DownloadBytes(string url)
