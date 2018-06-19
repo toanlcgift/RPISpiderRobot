@@ -75,6 +75,166 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OpenCvSharp.Tests\OpenCvSharp.Tests.csproj" />
     <ProjectReference Include="..\WiringPi\WiringPi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="_data\image\alphabet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\blob\shapes1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\blob\shapes2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\blob\shapes3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\building.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\building_mask.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\calibration\00.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\Readme.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000000_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000001_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000002_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000003_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000004_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000005_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000006_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000007_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000008_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000009_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000010_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000011_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000012_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000013_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000014_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000015_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000016_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000017_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000018_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000019_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\ETHZ\seq03-img-left\image_00000020_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\lenna.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\markers_6x6_250.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\space_shuttle.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\tsukuba_left.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\image\tsukuba_right.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\tessdata\eng.traineddata">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\tessdata\pdf.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\text\bvlc_googlenet.prototxt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\text\haarcascade_frontalface_default.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="_data\text\synset_words.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
   </ItemGroup>
 </Project>

@@ -10,6 +10,8 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using OpenCvSharp.Tests.Face;
+using OpenCvSharp.Tests.Text;
 using SamplesCore;
 using WiringPi;
 
@@ -21,6 +23,10 @@ namespace LiveStreamServer
         {
             ISample sample =
             new CaffeSample();
+            //OCRTesseractTest test = new OCRTesseractTest();
+            //test.Run();
+            LBPHFaceRecognizerTest test = new LBPHFaceRecognizerTest();
+            test.TrainAndPredict();
             //new ClaheSample();
             //new ConnectedComponentsSample();
             //new HOGSample();
