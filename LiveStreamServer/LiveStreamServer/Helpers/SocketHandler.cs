@@ -31,20 +31,24 @@ namespace LiveStreamServer.Helper
 
             while (this.socket.State == WebSocketState.Open)
             {
-                Console.WriteLine("client connected");
-                var incoming = await this.socket.ReceiveAsync(seg, CancellationToken.None);
-                if (System.Text.Encoding.UTF8.GetString(seg.ToArray()).Contains("live"))
+                try
                 {
-                    //Console.WriteLine("rm -rf ClientApp/dist/video.mp4".Bash());
-                    //Console.WriteLine("raspivid -o ClientApp/dist/video.h264 -t 2000".Bash());
-                    //Console.WriteLine("MP4Box -add ClientApp/dist/video.h264 ClientApp/dist/video.mp4".Bash());
-                    //Console.WriteLine("chmod 777 ClientApp/dist/video.mp4".Bash());
-                    //Console.WriteLine("rm -rf ClientApp/dist/video.h264".Bash());
-                    PushImageStream();
-                }
+                    Console.WriteLine("client connected");
+                    var incoming = await this.socket.ReceiveAsync(seg, CancellationToken.None);
+                    if (System.Text.Encoding.UTF8.GetString(seg.ToArray()).Contains("live"))
+                    {
+                        //Console.WriteLine("rm -rf ClientApp/dist/video.mp4".Bash());
+                        //Console.WriteLine("raspivid -o ClientApp/dist/video.h264 -t 2000".Bash());
+                        //Console.WriteLine("MP4Box -add ClientApp/dist/video.h264 ClientApp/dist/video.mp4".Bash());
+                        //Console.WriteLine("chmod 777 ClientApp/dist/video.mp4".Bash());
+                        //Console.WriteLine("rm -rf ClientApp/dist/video.h264".Bash());
+                        PushImageStream();
+                    }
 
-                //var outgoing = new ArraySegment<byte>(buffer, 0, incoming.Count);
-                //await this.socket.SendAsync(outgoing, WebSocketMessageType.Text, true, CancellationToken.None);
+                    //var outgoing = new ArraySegment<byte>(buffer, 0, incoming.Count);
+                    //await this.socket.SendAsync(outgoing, WebSocketMessageType.Text, true, CancellationToken.None);
+                }
+                catch { }
             }
         }
 
@@ -88,7 +92,8 @@ namespace LiveStreamServer.Helper
                     capture.Read(image); // same as cvQueryFrame
                     if (image.Empty())
                         break;
-                    Task.Run(() => {
+                    Task.Run(() =>
+                    {
                         var rect = cascadeClassifier.DetectMultiScale(image, 1.3, 5, HaarDetectionType.FindBiggestObject);
                         if (rect.Count() > 0)
                         {
@@ -99,7 +104,8 @@ namespace LiveStreamServer.Helper
                         }
                     });
 
-                    Task.Run(() => {
+                    Task.Run(() =>
+                    {
                         var found = hog.DetectMultiScale(image, 0, new Size(8, 8), new Size(24, 16), 1.05, 2);
                         if (found.Count() > 0)
                         {

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using OpenCvSharp.Tests.Face;
 using OpenCvSharp.Tests.Text;
+using OpenCvSharp.Tests.XImgProc;
 using SamplesCore;
 using WiringPi;
 
@@ -25,8 +26,11 @@ namespace LiveStreamServer
             new CaffeSample();
             //OCRTesseractTest test = new OCRTesseractTest();
             //test.Run();
-            LBPHFaceRecognizerTest test = new LBPHFaceRecognizerTest();
-            test.TrainAndPredict();
+            //LBPHFaceRecognizerTest test = new LBPHFaceRecognizerTest();
+            //test.TrainAndPredict();
+            FastLineDetectorTest test = new FastLineDetectorTest();
+            test.DrawSegmentsUsingInputArray();
+            test.DrawSegmentsUsingVector();
             //new ClaheSample();
             //new ConnectedComponentsSample();
             //new HOGSample();
