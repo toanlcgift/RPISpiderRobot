@@ -28,9 +28,9 @@ namespace LiveStreamServer
             //test.Run();
             //LBPHFaceRecognizerTest test = new LBPHFaceRecognizerTest();
             //test.TrainAndPredict();
-            FastLineDetectorTest test = new FastLineDetectorTest();
-            test.DrawSegmentsUsingInputArray();
-            test.DrawSegmentsUsingVector();
+            //FastLineDetectorTest test = new FastLineDetectorTest();
+            //test.DrawSegmentsUsingInputArray();
+            //test.DrawSegmentsUsingVector();
             //new ClaheSample();
             //new ConnectedComponentsSample();
             //new HOGSample();

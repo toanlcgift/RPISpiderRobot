@@ -92,29 +92,29 @@ namespace LiveStreamServer.Helper
                     capture.Read(image); // same as cvQueryFrame
                     if (image.Empty())
                         break;
-                    Task.Run(() =>
-                    {
-                        var rect = cascadeClassifier.DetectMultiScale(image, 1.3, 5, HaarDetectionType.FindBiggestObject);
-                        if (rect.Count() > 0)
-                        {
-                            for (int i = 0; i < rect.Count(); i++)
-                            {
-                                Cv2.Rectangle(image, rect[i], Scalar.Red, 2);
-                            }
-                        }
-                    });
+                    //Task.Run(() =>
+                    //{
+                    //    var rect = cascadeClassifier.DetectMultiScale(image, 1.3, 5, HaarDetectionType.FindBiggestObject);
+                    //    if (rect.Count() > 0)
+                    //    {
+                    //        for (int i = 0; i < rect.Count(); i++)
+                    //        {
+                    //            Cv2.Rectangle(image, rect[i], Scalar.Red, 2);
+                    //        }
+                    //    }
+                    //});
 
-                    Task.Run(() =>
-                    {
-                        var found = hog.DetectMultiScale(image, 0, new Size(8, 8), new Size(24, 16), 1.05, 2);
-                        if (found.Count() > 0)
-                        {
-                            for (int i = 0; i < found.Count(); i++)
-                            {
-                                Cv2.Rectangle(image, found[i], Scalar.Green, 2);
-                            }
-                        }
-                    });
+                    //Task.Run(() =>
+                    //{
+                    //    var found = hog.DetectMultiScale(image, 0, new Size(8, 8), new Size(24, 16), 1.05, 2);
+                    //    if (found.Count() > 0)
+                    //    {
+                    //        for (int i = 0; i < found.Count(); i++)
+                    //        {
+                    //            Cv2.Rectangle(image, found[i], Scalar.Green, 2);
+                    //        }
+                    //    }
+                    //});
 
                     var bytes = image.ToMemoryStream().ToArray();
                     await this.socket.SendAsync(new ArraySegment<byte>(bytes, 0, bytes.Length), WebSocketMessageType.Binary, true, CancellationToken.None);

@@ -4,6 +4,7 @@ import { AsideLeftMinimizeDefaultEnabledComponent } from '../pages/aside-left-mi
 import { HeaderNavComponent } from './header-nav/header-nav.component';
 import { DefaultComponent } from '../pages/default/default.component';
 import { AsideNavComponent } from './aside-nav/aside-nav.component';
+import { CustomAsideNavComponent } from './aside-nav/custom-aside-nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { QuickSidebarComponent } from './quick-sidebar/quick-sidebar.component';
 import { ScrollTopComponent } from './scroll-top/scroll-top.component';
@@ -20,6 +21,7 @@ import { UnwrapTagDirective } from '../../_directives/unwrap-tag.directive';
         HeaderNavComponent,
         DefaultComponent,
         AsideNavComponent,
+        CustomAsideNavComponent,
         FooterComponent,
         QuickSidebarComponent,
         ScrollTopComponent,
@@ -33,6 +35,7 @@ import { UnwrapTagDirective } from '../../_directives/unwrap-tag.directive';
         HeaderNavComponent,
         DefaultComponent,
         AsideNavComponent,
+        CustomAsideNavComponent,
         FooterComponent,
         QuickSidebarComponent,
         ScrollTopComponent,
