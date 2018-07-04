@@ -18,6 +18,9 @@ namespace LiveStreamServer.Helper
         public const int BufferSize = 4096;
 
         WebSocket socket;
+        Mat currentMat = new Mat();
+        IList<Rect> currentFaces = new List<Rect>();
+        IList<Rect> currentBodies = new List<Rect>();
 
         SocketHandler(WebSocket socket)
         {
@@ -86,35 +89,37 @@ namespace LiveStreamServer.Helper
             {
                 // Frame image buffer
                 Mat image = new Mat();
+
+                Task.Run(() =>
+                {
+                    while (true)
+                        FaceProcessing(image, cascadeClassifier);
+                });
+
+                Task.Run(() =>
+                {
+                    while (true)
+                        HogProcessing(image, hog);
+                });
+
                 // When the movie playback reaches end, Mat.data becomes NULL.
                 while (true)
                 {
                     capture.Read(image); // same as cvQueryFrame
                     if (image.Empty())
                         break;
-                    //Task.Run(() =>
-                    //{
-                    //    var rect = cascadeClassifier.DetectMultiScale(image, 1.3, 5, HaarDetectionType.FindBiggestObject);
-                    //    if (rect.Count() > 0)
-                    //    {
-                    //        for (int i = 0; i < rect.Count(); i++)
-                    //        {
-                    //            Cv2.Rectangle(image, rect[i], Scalar.Red, 2);
-                    //        }
-                    //    }
-                    //});
 
-                    //Task.Run(() =>
-                    //{
-                    //    var found = hog.DetectMultiScale(image, 0, new Size(8, 8), new Size(24, 16), 1.05, 2);
-                    //    if (found.Count() > 0)
-                    //    {
-                    //        for (int i = 0; i < found.Count(); i++)
-                    //        {
-                    //            Cv2.Rectangle(image, found[i], Scalar.Green, 2);
-                    //        }
-                    //    }
-                    //});
+                    currentMat = image.Clone();
+
+                    foreach (var rect in currentFaces)
+                    {
+                        Cv2.Rectangle(image, rect, Scalar.Red, 2);
+                    }
+
+                    foreach (var rect in currentBodies)
+                    {
+                        Cv2.Rectangle(image, rect, Scalar.Green, 2);
+                    }
 
                     var bytes = image.ToMemoryStream().ToArray();
                     await this.socket.SendAsync(new ArraySegment<byte>(bytes, 0, bytes.Length), WebSocketMessageType.Binary, true, CancellationToken.None);
@@ -126,6 +131,32 @@ namespace LiveStreamServer.Helper
                     //}
 
                 }
+            }
+        }
+
+        void FaceProcessing(Mat image, CascadeClassifier cascadeClassifier)
+        {
+            if (image.Empty())
+                return;
+
+            var rects = cascadeClassifier.DetectMultiScale(image, 1.3, 5, HaarDetectionType.FindBiggestObject);
+            currentFaces.Clear();
+            foreach (var item in rects)
+            {
+                currentFaces.Add(item);
+            }
+        }
+
+        void HogProcessing(Mat image, HOGDescriptor hog)
+        {
+            if (image.Empty())
+                return;
+
+            var found = hog.DetectMultiScale(image, 0, new Size(8, 8), new Size(24, 16), 1.05, 2);
+            currentBodies.Clear();
+            foreach (var item in found)
+            {
+                currentBodies.Add(item);
             }
         }
 
