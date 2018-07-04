@@ -76,7 +76,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OpenCvSharp.Tests\OpenCvSharp.Tests.csproj" />
-    <ProjectReference Include="..\WiringPi\WiringPi.csproj" />
+    <ProjectReference Include="..\WiringPiNetCore\WiringPiNetCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>

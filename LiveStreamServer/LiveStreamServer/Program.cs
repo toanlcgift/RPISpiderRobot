@@ -14,7 +14,7 @@ using OpenCvSharp.Tests.Face;
 using OpenCvSharp.Tests.Text;
 using OpenCvSharp.Tests.XImgProc;
 using SamplesCore;
-using WiringPi;
+//using WiringPi;
 
 namespace LiveStreamServer
 {
@@ -52,19 +52,19 @@ namespace LiveStreamServer
             BuildWebHost(args).Run();
         }
 
-        public static void TestWiringPi()
-        {
-            Init.WiringPiSetupSys();
-            Init.WiringPiSetup();
+        //public static void TestWiringPi()
+        //{
+        //    Init.WiringPiSetupSys();
+        //    Init.WiringPiSetup();
 
-            int i = 0;
-            for (; ; )
-            {
-                WiringPi.GPIO.digitalWrite(0, (i++) % 2);
-                Console.WriteLine(i % 2);
-                Thread.Sleep(1000);
-            }
-        }
+        //    int i = 0;
+        //    for (; ; )
+        //    {
+        //        WiringPi.GPIO.digitalWrite(0, (i++) % 2);
+        //        Console.WriteLine(i % 2);
+        //        Thread.Sleep(1000);
+        //    }
+        //}
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
