@@ -10,6 +10,7 @@ using LiveStreamServer.Helpers;
 using OpenCvSharp;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using OpenCvSharp.Dnn;
 
 namespace LiveStreamServer.Helper
 {
@@ -21,6 +22,8 @@ namespace LiveStreamServer.Helper
         Mat currentMat = new Mat();
         IList<Rect> currentFaces = new List<Rect>();
         IList<Rect> currentBodies = new List<Rect>();
+        int classId;
+        double classProb;
 
         SocketHandler(WebSocket socket)
         {
@@ -85,6 +88,13 @@ namespace LiveStreamServer.Helper
             recognizer.Predict(InputArray.Create(img1), out int label, out double confidence);
             System.Console.WriteLine("label: " + label + " confidence: " + confidence);
 
+            const string protoTxt = @"Data/Text/bvlc_googlenet.prototxt";
+            const string caffeModel = "bvlc_googlenet.caffemodel";
+            const string synsetWords = @"Data/Text/synset_words.txt";
+            var classNames = File.ReadAllLines(synsetWords)
+                .Select(line => line.Split(' ').Last())
+                .ToArray();
+            using (var net = CvDnn.ReadNetFromCaffe(protoTxt, caffeModel))
             //using (var window = new Window("capture"))
             {
                 // Frame image buffer
@@ -100,6 +110,12 @@ namespace LiveStreamServer.Helper
                 {
                     while (true)
                         HogProcessing(image, hog);
+                });
+
+                Task.Run(() =>
+                {
+                    while (true)
+                        CaffeProcessing(image, net, classNames);
                 });
 
                 // When the movie playback reaches end, Mat.data becomes NULL.
@@ -120,6 +136,9 @@ namespace LiveStreamServer.Helper
                     {
                         Cv2.Rectangle(image, rect, Scalar.Green, 2);
                     }
+
+                    image.PutText(classNames[this.classId] + String.Format(" Probability: {0:P2}", this.classProb),
+                        new Point(0 + 10, image.Size().Height - 10), HersheyFonts.HersheyDuplex, 1, Scalar.Black);
 
                     var bytes = image.ToMemoryStream().ToArray();
                     await this.socket.SendAsync(new ArraySegment<byte>(bytes, 0, bytes.Length), WebSocketMessageType.Binary, true, CancellationToken.None);
@@ -157,6 +176,43 @@ namespace LiveStreamServer.Helper
             foreach (var item in found)
             {
                 currentBodies.Add(item);
+            }
+        }
+
+        void CaffeProcessing(Mat image, Net net, string[] classNames)
+        {
+            Console.WriteLine("Layer names: {0}", string.Join(", ", net.GetLayerNames()));
+            Console.WriteLine();
+
+            // Convert Mat to batch of images
+            using (var inputBlob = CvDnn.BlobFromImage(image, 1, new Size(224, 224), new Scalar(104, 117, 123)))
+            {
+                net.SetInput(inputBlob, "data");
+                using (var prob = net.Forward("prob"))
+                {
+                    // find the best class
+                    GetMaxClass(prob, out int classId, out double classProb);
+                    Console.WriteLine("Best class: #{0} '{1}'", classId, classNames[classId]);
+                    Console.WriteLine("Probability: {0:P2}", classProb);
+                    this.classId = classId;
+                    this.classProb = classProb;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Find best class for the blob (i. e. class with maximal probability)
+        /// </summary>
+        /// <param name="probBlob"></param>
+        /// <param name="classId"></param>
+        /// <param name="classProb"></param>
+        private void GetMaxClass(Mat probBlob, out int classId, out double classProb)
+        {
+            // reshape the blob to 1x1000 matrix
+            using (var probMat = probBlob.Reshape(1, 1))
+            {
+                Cv2.MinMaxLoc(probMat, out _, out classProb, out _, out var classNumber);
+                classId = classNumber.X;
             }
         }
 
