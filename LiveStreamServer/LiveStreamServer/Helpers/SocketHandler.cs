@@ -138,7 +138,7 @@ namespace LiveStreamServer.Helper
                     }
 
                     image.PutText(classNames[this.classId] + String.Format(" Probability: {0:P2}", this.classProb),
-                        new Point(0 + 10, image.Size().Height - 10), HersheyFonts.HersheyDuplex, 1, Scalar.Black);
+                        new Point(0 + 10, image.Size().Height - 10), HersheyFonts.HersheyDuplex, 1, Scalar.White);
 
                     var bytes = image.ToMemoryStream().ToArray();
                     await this.socket.SendAsync(new ArraySegment<byte>(bytes, 0, bytes.Length), WebSocketMessageType.Binary, true, CancellationToken.None);
@@ -181,8 +181,8 @@ namespace LiveStreamServer.Helper
 
         void CaffeProcessing(Mat image, Net net, string[] classNames)
         {
-            Console.WriteLine("Layer names: {0}", string.Join(", ", net.GetLayerNames()));
-            Console.WriteLine();
+            if (image.Empty())
+                return;
 
             // Convert Mat to batch of images
             using (var inputBlob = CvDnn.BlobFromImage(image, 1, new Size(224, 224), new Scalar(104, 117, 123)))
@@ -192,8 +192,8 @@ namespace LiveStreamServer.Helper
                 {
                     // find the best class
                     GetMaxClass(prob, out int classId, out double classProb);
-                    Console.WriteLine("Best class: #{0} '{1}'", classId, classNames[classId]);
-                    Console.WriteLine("Probability: {0:P2}", classProb);
+                    //Console.WriteLine("Best class: #{0} '{1}'", classId, classNames[classId]);
+                    //Console.WriteLine("Probability: {0:P2}", classProb);
                     this.classId = classId;
                     this.classProb = classProb;
                 }

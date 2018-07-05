@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using OpenCvSharp.Tests.Face;
+using OpenCvSharp.Tests.HighGui;
 using OpenCvSharp.Tests.Text;
 using OpenCvSharp.Tests.XImgProc;
 using SamplesCore;
@@ -24,6 +25,8 @@ namespace LiveStreamServer
         {
             ISample sample =
             new CaffeSample();
+            //TrackbarTest test = new TrackbarTest();
+            //test.RunTest();
             //OCRTesseractTest test = new OCRTesseractTest();
             //test.Run();
             //LBPHFaceRecognizerTest test = new LBPHFaceRecognizerTest();
