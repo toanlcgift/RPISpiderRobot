@@ -10,15 +10,16 @@ export class LiveStreamComponent implements OnInit {
 
     constructor() {
     }
-    
+
+    socket: WebSocket;
 
     ngOnInit() {
-        var socket = new WebSocket("ws://" + self.location.host + "/ws");
-        socket.binaryType = "arraybuffer";
-        socket.onopen = function(event) {
-            socket.send("live");
+        this.socket = new WebSocket("ws://" + self.location.host + "/ws");
+        this.socket.binaryType = "arraybuffer";
+        this.socket.onopen = function(event) {
+            this.send("live");
         };
-        socket.onmessage = function(event) {
+        this.socket.onmessage = function(event) {
             var frame = new Uint8Array(event.data);
             var image = document.getElementById("mainimage");
 
@@ -48,5 +49,9 @@ export class LiveStreamComponent implements OnInit {
 
             image.setAttribute('src', 'data:image/png;base64,' + output);
         }
+    }
+
+    record() {
+
     }
 }
