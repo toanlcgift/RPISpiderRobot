@@ -28,13 +28,6 @@ static const char ssid[] = "ESP8266AccessPoint";
 static const char password[] = "123456789";
 
 static const char* servo0 = "servo0";
-static const char* servo1 = "servo1";
-static const char* servo2 = "servo2";
-static const char* servo3 = "servo3";
-static const char* servo4 = "servo4";
-static const char* servo5 = "servo5";
-static const char* servo6 = "servo6";
-static const char* servo7 = "servo7";
 
 MDNSResponder mdns;
 ESP8266WebServer server(80);
@@ -56,13 +49,13 @@ char parse[3];
 void setup()
 {
 	myservo[0].attach(16);  // attaches the servo on GIO2 to the servo object 
-	myservo[1].attach(5);
+	/*myservo[1].attach(5);
 	myservo[2].attach(4);
 	myservo[3].attach(0);
 	myservo[4].attach(2);
 	myservo[5].attach(14);
 	myservo[6].attach(12);
-	myservo[7].attach(13);
+	myservo[7].attach(13);*/
 	Serial.begin(9600);
 	EEPROM.begin(512);
 	for (uint8_t t = 4; t > 0; t--) {
@@ -143,20 +136,6 @@ void onPostServo() {
 	JsonObject& root = jsonBuffer.parseObject(con);
 	if (root.containsKey(servo0))
 		myservo[0].write((int)(root[servo0]));
-	if (root.containsKey(servo1))
-		myservo[1].write((int)(root[servo1]));
-	if (root.containsKey(servo2))
-		myservo[2].write((int)(root[servo2]));
-	if (root.containsKey(servo3))
-		myservo[3].write((int)(root[servo3]));
-	if (root.containsKey(servo4))
-		myservo[4].write((int)(root[servo4]));
-	if (root.containsKey(servo5))
-		myservo[5].write((int)(root[servo5]));
-	if (root.containsKey(servo6))
-		myservo[6].write((int)(root[servo6]));
-	if (root.containsKey(servo7))
-		myservo[7].write((int)(root[servo7]));
 	server.send_P(200, "text/html", "success!");
 }
 
@@ -169,7 +148,6 @@ void getRomSetting() {
 	value[1] = EEPROM.read(1);
 	memset(connectssid, '\0', 40);
 	memset(connectpassword, '\0', 40);
-	memset(host, '\0', 100);
 	romsize = atoi((char*)value);
 
 	for (int i = 0; i < romsize + 3; i++) {
@@ -182,9 +160,6 @@ void getRomSetting() {
 				break;
 			case 2:
 				connectpassword[passwordindex++] = valueindex;
-				break;
-			case 3:
-				host[hostindex++] = valueindex;
 				break;
 			}
 		}
