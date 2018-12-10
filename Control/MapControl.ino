@@ -22,7 +22,7 @@
 Servo myservo[8];  // create servo object to control a servo 
 				// twelve servo objects can be created on most boards
 
-Timer t;
+Timer timer;
 
 static const char ssid[] = "ESP8266AccessPoint";
 static const char password[] = "123456789";
@@ -46,16 +46,43 @@ int count = 0;
 char valueindex;
 char parse[3];
 
+
+void Get(String host) {
+	HTTPClient http;
+
+	Serial.print("[HTTP] begin...\n");
+	// configure traged server and url
+	String url = host;
+	http.begin(url); //HTTP
+
+	Serial.print("[HTTP] POST...\n");
+	Serial.println(url);
+	// start connection and send HTTP header
+	http.addHeader("Content-Type", "application/json");
+	int httpCode = http.GET();
+
+	// httpCode will be negative on error
+	if (httpCode > 0) {
+		// HTTP header has been send and Server response header has been handled
+		Serial.printf("[HTTP] GET POST... code: %d\n", httpCode);
+
+		// file found at server
+		if (httpCode == HTTP_CODE_OK) {
+			String payload = http.getString();
+			Serial.println(payload);
+		}
+	}
+	else {
+		Serial.printf("[HTTP] GET POST... failed, error: %s\n", http.errorToString(httpCode).c_str());
+	}
+
+	http.end();
+}
+
 void setup()
 {
 	myservo[0].attach(16);  // attaches the servo on GIO2 to the servo object 
-	/*myservo[1].attach(5);
-	myservo[2].attach(4);
-	myservo[3].attach(0);
-	myservo[4].attach(2);
-	myservo[5].attach(14);
-	myservo[6].attach(12);
-	myservo[7].attach(13);*/
+
 	Serial.begin(9600);
 	EEPROM.begin(512);
 	for (uint8_t t = 4; t > 0; t--) {
@@ -81,16 +108,24 @@ void setup()
 			break;
 		}
 	}
-
+	timer.every(5 * 1000, getData);
 	setup_setting_server();
 	Serial.println("WiFi connected");
 	Serial.println("IP address: ");
 	Serial.println(WiFi.localIP());
 }
 
+
+
+void getData() {
+	if ((WiFiMulti.run() == WL_CONNECTED)) {
+		Get(host);
+	}
+}
+
 void loop()
 {
-	t.update();
+	timer.update();
 	ftpSrv.handleFTP();
 	server.handleClient();
 }
@@ -161,6 +196,9 @@ void getRomSetting() {
 			case 2:
 				connectpassword[passwordindex++] = valueindex;
 				break;
+			case 3:
+				host[hostindex++] = valueindex;
+				break;
 			}
 		}
 		else
@@ -204,3 +242,4 @@ void setup_local_wifi() {
 
 	setup_setting_server();
 }
+

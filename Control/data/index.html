@@ -15,13 +15,16 @@
                 var val = data.split("*");
                 document.getElementById('wifi').value = val[0];
                 document.getElementById('password').value = val[1];
+                document.getElementById('host').value = val[2];
             })
         }
 
         function buttonclick(e) {
             var wifi = document.getElementById('wifi');
             var password = document.getElementById('password');
-            var datapost = (wifi.value.length + password.value.length +3).toString() + "*" + wifi.value + "*" + password.value;
+            var host = document.getElementById('host');
+            var datapost = (wifi.value.length + password.value.length + host.value.length + 4).toString() + "*" + wifi.value + "*" + password.value + "*" + host.value;
+            
             $.ajax({
                 url: "/setting",
                 type: "POST",
@@ -44,6 +47,10 @@
             <div class="form-group">
                 <label for="password">Wifi Password:</label>
                 <input id="password" class="form-control" type="text" placeholder="Password" maxlength="40" required="required" />
+            </div>
+            <div class="form-group">
+                <label for="host">Server Host:</label>
+                <input id="host" type="text" class="form-control" placeholder="Host" maxlength="100" required="required" />
             </div>
             <div class="form-group">
                 <button onclick="buttonclick(this);" class="btn btn-primary">OK</button>
