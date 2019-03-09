@@ -15,6 +15,8 @@
             public const string TsukubaRight = "Data/Image/tsukuba_right.png";
             public const string Shapes = "Data/Image/shapes.png";
             public const string Asahiyama = "Data/Image/asahiyama.jpg";
+            public const string Src = "Data/Image/src.png";
+            public const string Test = "Data/Image/test.png";
         }
 
         public static class Movie
