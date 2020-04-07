@@ -75,10 +75,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OpenCvSharp.Tests\OpenCvSharp.Tests.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="_data\image\alphabet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

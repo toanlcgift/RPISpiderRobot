@@ -1,20 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using LiveStreamServer.Helpers;
-using LiveStreamServer.Samples;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using OpenCvSharp.Tests.Face;
-using OpenCvSharp.Tests.HighGui;
-using OpenCvSharp.Tests.Text;
-using OpenCvSharp.Tests.XImgProc;
-using SamplesCore;
 //using WiringPi;
 
 namespace LiveStreamServer
