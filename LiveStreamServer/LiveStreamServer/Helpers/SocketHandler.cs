@@ -55,40 +55,37 @@ namespace LiveStreamServer.Helper
                     //var outgoing = new ArraySegment<byte>(buffer, 0, incoming.Count);
                     //await this.socket.SendAsync(outgoing, WebSocketMessageType.Text, true, CancellationToken.None);
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    break;
+                }
             }
         }
 
         async void PushImageStream()
         {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+
+            using (VideoCapture capture = new VideoCapture(Movie.Bach))
             {
-                Console.WriteLine("run bash shell: 'sudo modprobe bcm2835-v4l2'");
-                "sudo modprobe bcm2835-v4l2".Bash();
+                using (Mat image = new Mat())
+                    while (true && this.socket.State == WebSocketState.Open)
+                    {
+                        capture.Read(image); // same as cvQueryFrame
+                        if (image.Empty())
+                            break;
+
+                        var bytes = image.ToMemoryStream().ToArray();
+                        await this.socket.SendAsync(new ArraySegment<byte>(bytes, 0, bytes.Length), WebSocketMessageType.Binary, true, CancellationToken.None);
+
+                        if (capture.PosFrames == capture.FrameCount)
+                        {
+                            capture.PosFrames = 0;
+                        }
+
+                    }
             }
-            CascadeClassifier cascadeClassifier = new CascadeClassifier("haarcascade_frontalface_default.xml");
-            // Opens MP4 file (ffmpeg is probably needed)
-            var capture = new VideoCapture(Movie.Bach);
-            Mat image = new Mat();
-            //using (var window = new Window("capture"))
-                // When the movie playback reaches end, Mat.data becomes NULL.
-                while (true)
-                {
-                    capture.Read(image); // same as cvQueryFrame
-                    if (image.Empty())
-                        break;
-               
-                    var bytes = image.ToMemoryStream().ToArray();
-                    //window.ShowImage(image);
-                    await this.socket.SendAsync(new ArraySegment<byte>(bytes, 0, bytes.Length), WebSocketMessageType.Binary, true, CancellationToken.None);
 
-                    //if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                    //{
-                    //    window.ShowImage(image);
-                    //    Cv2.WaitKey(sleepTime);
-                    //}
-
-                }
         }
         static async Task Acceptor(HttpContext hc, Func<Task> n)
         {
