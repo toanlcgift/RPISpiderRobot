@@ -23,8 +23,8 @@ namespace LiveStreamServer
     {
         public static void Main(string[] args)
         {
-            ISample sample =
-            new TemplateMatching();
+            //ISample sample =
+            //new TemplateMatching();
             //TrackbarTest test = new TrackbarTest();
             //test.RunTest();
             //OCRTesseractTest test = new OCRTesseractTest();
@@ -50,9 +50,9 @@ namespace LiveStreamServer
             //new VideoCaptureSample();
             //TestWiringPi();
             //new FaceDetection();
-            sample.Run();
+            //sample.Run();
             //"mkdir testdir".Bash();
-            //BuildWebHost(args).Run();
+            BuildWebHost(args).Run();
         }
 
         //public static void TestWiringPi()
